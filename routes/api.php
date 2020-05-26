@@ -14,6 +14,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+
+Route::Post('/user/register', 'ApiRegisterController@register');
+Route::post('/user/login', 'ApiLoginController@login');
+
+
+Route::middleware('jwt.auth')->get('/users', function (Request $request) {
+    return auth()->user();
 });
