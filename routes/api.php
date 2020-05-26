@@ -20,5 +20,12 @@ Route::post('/user/login', 'ApiLoginController@login');
 
 
 Route::middleware('jwt.auth')->get('/users', function (Request $request) {
-    return auth()->user();
+    Route::post('/user/login', 'ApiLoginController@login');
+
+});
+
+Route::resource('books', 'API\bookController');
+Route::middleware('jwt.auth')->group( function () {
+    Route::resource('books', 'API\BookController');
+
 });
